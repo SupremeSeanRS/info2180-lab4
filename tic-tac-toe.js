@@ -15,6 +15,7 @@ function displayXorO() {
                 cells[i].innerHTML = "X";
                 game.push("X");
                 checkWinner();
+                reset();
             }
             else {
                 if (game[game.length - 1] === "X" && cells[i].innerHTML === ""){
@@ -22,12 +23,14 @@ function displayXorO() {
                     cells[i].innerHTML = "O";
                     game.push("O");
                     checkWinner();
+                    reset();
                 }
                 else if (game[game.length - 1] === "O" && cells[i].innerHTML === ""){
                     cells[i].classList.add("square", "X");
                     cells[i].innerHTML = "X";
                     game.push("X");
                     checkWinner();
+                    reset();
                 }
             }
         }
@@ -115,22 +118,19 @@ function checkWinner() {
     }
 }
 
-function resetBoard() {
-    let ch1 = document.getElementById("board").children;
-    let button = document.getElementById("btn");
-    button.onclick = function() {
-        document.getElementById("status").innerHTML = "Move your mouse over a square and click to play an X or an O."
-        ch1[0].innerHTML = "";
-        ch1[1].innerHTML = "";
-        ch1[2].innerHTML = "";
-        ch1[3].innerHTML = "";
-        ch1[4].innerHTML = "";
-        ch1[5].innerHTML = "";
-        ch1[6].innerHTML = "";
-        ch1[7].innerHTML = "";
-        ch1[8].innerHTML = "";
-    }
+function reset() {
+    let bCells = document.querySelectorAll("#board div");
+    document.getElementsByClassName("btn")[0].addEventListener("click", function() {
+        game.length = 0;
+        for (let j= 0; j < bCells.length; j++) {
+            bCells[j].innerHTML = "";
+        }
+
+        document.getElementById("status").innerHTML = "Move your mouse over a square and click to play an X or an O.";
+        document.getElementById("status").classList.remove("you-won");
+    });
 }
+
 
 
 function start() {
