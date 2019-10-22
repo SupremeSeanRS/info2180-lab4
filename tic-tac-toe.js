@@ -31,9 +31,23 @@ function displayXorO() {
     }
 }
 
+function mouseSquare() {
+    let squares = document.getElementById("board").children;
+    for (let i = 0; i < squares.length; i++) {
+        squares[i].onmouseover = function() {
+            squares[i].classList.toggle("hover", true)
+        }
+        squares[i].onmouseout = function() {
+            squares[i].classList.toggle("hover", false)
+        }
+    }
+    
+}
+
 function start() {
     startBoard();
     displayXorO();
+    mouseSquare();
 }
 
 window.onload = start;
